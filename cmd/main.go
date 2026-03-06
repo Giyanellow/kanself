@@ -1,27 +1,17 @@
 package main
 
-type status int
+import (
+	"fmt"
+	"os"
 
-const (
-	todo status = iota
-	inProgress
-	done
+	tea "charm.land/bubbletea/v2"
 )
 
-type Task struct {
-	Title       string
-	Description string
-	Status      status
-}
-
-func (t Task) GetTitle() string {
-	return t.Title
-}
-
-func (t Task) GetDescription() string {
-	return t.Description
-}
-
-func (t Task) GetStatus() status {
-	return t.Status
+func main() {
+	m := New()
+	p := tea.NewProgram(m)
+	if _, err := p.Run(); err != nil {
+		fmt.Println(err.Error())
+		os.Exit(1)
+	}
 }
